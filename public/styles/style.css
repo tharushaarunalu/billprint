@@ -1,0 +1,78 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff; /* White background */
+    color: #000000; /* Black text */
+    margin: 0;
+    padding: 20px;
+}
+
+/* Headings */
+h1, h2, h3 {
+    color: #ff6600; /* Orange for headings */
+}
+
+/* Buttons and Inputs */
+button, select, input[type="number"] {
+    background-color: #ff6600; /* Orange buttons */
+    color: #ffffff; /* White text */
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+button:hover, select:hover, input[type="number"]:hover {
+    background-color: #cc5200; /* Darker orange on hover */
+}
+
+/* Forms */
+form {
+    margin-bottom: 20px;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #000000; /* Black borders */
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #ff6600; /* Orange headers */
+    color: #ffffff; /* White text */
+}
+
+td {
+    background-color: #ffffff; /* White cells */
+    color: #000000; /* Black text */
+}
+
+/* Print Styles */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    .print-container, .print-container * {
+        visibility: visible;
+    }
+
+    .print-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    table, th, td {
+        border: 1px solid #000000; /* Ensure black borders for print */
+    }
+}

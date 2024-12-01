@@ -1,0 +1,48 @@
+<h2>Add Items</h2>
+<form method="POST" action="/add-items">
+    <input type="text" name="itemNumber" placeholder="Item Number" required>
+    <input type="text" name="itemName" placeholder="Item Name" required>
+    <input type="number" name="price" placeholder="Price" required>
+    <input type="number" name="quantity" placeholder="Quantity" required>
+    <input type="text" name="image" placeholder="Image URL" required>
+    <button type="submit">Add Item</button>
+</form>
+
+<h3>Inventory</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Item Number</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% inventory.forEach(item => { %>
+            <tr>
+                <td><%= item.itemNumber %></td>
+                <td><%= item.itemName %></td>
+                <td><%= item.price %></td>
+                <td><%= item.quantity %></td>
+                <td><img src="<%= item.image %>" alt="Item Image" width="50"></td>
+            </tr>
+        <% }); %>
+    </tbody>
+</table>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/style.css">
+
+</head>
+<body>
+    
+</body>
+</html>

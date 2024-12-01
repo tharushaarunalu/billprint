@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Bill Calculator</title>
+    <link rel="stylesheet" href="/styles/style.css"> <!-- Link to external CSS for styling -->
+    <style>
+         @media print {
+            body * {
+                visibility: hidden;
+            }
+            .print-container, .print-container * {
+                visibility: visible;
+            }
+            .print-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            table, th, td {
+                border: 1px solid black;
+            }
+            th, td {
+                text-align: left;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>Customer Bill Calculator</h1>
+
+<form action="/bill-calculator" method="POST">
+    <!-- Item selection -->
+    <label for="itemId">Select Item: </label>
+    <select id="itemId" name="itemId">
+        <% inventory.forEach(item => { %>
+            <option value="<%= item.itemNumber %>">
+                <%= item.itemName %> - $<%= parseFloat(item.price || 0).toFixed(2) %> (Available: <%= item.quantity || 0 %>)
+            </option>
+        <% }); %>
+    </select><br><br>
+
+    <!-- Quantity input -->
+    <label for="quantity">Quantity: </label>
+    <input type="number" id="quantity" name="quantity" min="1" required><br><br>
+
+    <!-- Discount input -->
+    <label for="discount">Discount (%): </label>
+    <input type="number" id="discount" name="discountRate" min="0" max="100" value="0" /><br><br>
+
+    <button type="submit">Add to Cart</button>
+</form>
+
+<!-- Cart Summary -->
+<% if (cart && cart.length > 0) { %>
+    <h2>Cart Summary</h2>
+    <div class="print-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                    <th>Discount</th>
+                    <th>Total After Discount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% cart.forEach(item => { %>
+                    <tr>
+                        <td><%= item.itemName %></td>
+                        <td><%= item.quantity %></td>
+                        <td>$<%= parseFloat(item.itemTotal || 0).toFixed(2) %></td>
+                        <td>$<%= parseFloat(item.itemTotal || 0).toFixed(2) %></td>
+                        <td><%= parseFloat(item.discount || 0).toFixed(2) %>%</td>
+                        <td>$<%= parseFloat(item.totalAfterDiscount || 0).toFixed(2) %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+
+        <h3>Total after Discount: $<%= parseFloat(total || 0).toFixed(2) %></h3>
+    </div>
+
+    <!-- Print Button -->
+    <button onclick="printCartSummary()">Print Cart Summary</button>
+
+    <!-- Clear cart button -->
+    <form action="/clear-cart" method="POST" style="display: inline;">
+        <button type="submit">Clear Cart</button>
+    </form>
+<% } %>
+
+<script>
+    // Print function for the "Cart Summary" section
+    function printCartSummary() {
+        window.print();
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+/project
+│
+├── /public
+│   └── /styles
+│       └── style.css
+│
+├── /views
+│   └── /pages
+│       ├── dashboard.ejs
+│       ├── add-items.ejs
+│       ├── bill-calculator.ejs
+│       └── login.ejs
+│
+├── /routes
+│   └── index.js
+│
+├── /node_modules
+│
+├── server.js
+├── package.json
+├── .gitignore
+└── README.md
